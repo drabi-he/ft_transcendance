@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: api
+    container_name: api
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+    ports:
+      - '3001:3001'
+    depends_on:
+      - postgres
+    volumes:
+      - api-data:/app
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: frontend
+    container_name: frontend
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - '3002:5432'
+    # volumes:
+    #   - db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  db-data:
+    driver_opts:
+      type: none
+      device: /Users/hdrabi/Desktop/ft_transcendance/db
+      o: bind
+
+  api-data:
+    driver_opts:
+      type: none
+      device: /Users/hdrabi/Desktop/ft_transcendance/backend
+      o: bind
+
+  frontend-data:
+    driver_opts:
+      type: none
+      device: /Users/hdrabi/Desktop/ft_transcendance/frontend
+      o: bind
