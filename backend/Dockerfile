@@ -2,9 +2,11 @@ FROM node:18.12.1-alpine
 
 WORKDIR /app
 
+RUN npm i -g @nestjs/cli
+
 COPY package*.json ./
 
-RUN npm install
+RUN npm install --include=dev
 
 EXPOSE 3001
 

@@ -1,0 +1,95 @@
+.navbar-container {
+  width: 284px;
+  height: 100vh;
+  background-color: #141d3c;
+  /* box-shadow: 3px 0 5px -4px #ffffff; */
+  border-right: 2px solid #ffffff33;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s linear;
+}
+
+.hidden {
+  width: 50px;
+}
+
+.hidden > .nav-items .item {
+  width: 50px;
+  padding-left: 5px;
+  /* justify-content: center; */
+}
+
+.hidden > .menu-btn svg {
+  rotate: -180deg;
+}
+
+.hidden > .nav-items .item-title {
+  /* display: none; */
+  left: -200px;
+  opacity: 0;
+}
+
+/*********************************************** NAV BTN ***********************************************/
+
+.menu-btn {
+  height: 50px;
+  width: 50px;
+  background: linear-gradient(116.04deg, #3c60ff 23.36%, #4a33c7 77.76%);
+  display: flex;
+  align-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+  border-radius: 4px 0 0 4px;
+  cursor: pointer;
+}
+
+.menu-btn svg {
+  color: #fff;
+  font-size: 4rem;
+  transition: all 0.3s linear;
+}
+
+/*********************************************** NAV ITEMS ***********************************************/
+
+.nav-items {
+  color: #dadada;
+  cursor: pointer;
+}
+
+.nav-items .item {
+  display: flex;
+  align-items: center;
+  width: 284px;
+  height: 61px;
+  padding-left: 50px;
+  border-right: 2px solid transparent;
+  transition: all 0.3s linear;
+}
+
+.nav-items .item:not(.selected):hover {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(50, 50, 50, 0) 0%, #4933c77b 100%);
+}
+
+.item .item-icon {
+  font-size: 2.5rem;
+  margin-right: 20px;
+  z-index: 1;
+}
+.item .item-title {
+  text-transform: capitalize;
+  position: relative;
+  font-size: 1.5rem;
+  font-weight: 600;
+  user-select: none;
+  left: 0px;
+  opacity: 1;
+  transition: all 0.3s linear;
+}
+
+.selected {
+  color: #fff;
+  background: linear-gradient(90deg, rgba(50, 50, 50, 0) 0%, #4a33c7 100%);
+  border-right: 2px solid #927dff !important;
+}

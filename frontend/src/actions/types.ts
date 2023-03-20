@@ -1,0 +1,3 @@
+export const GET_CURRENT_USER = "GET_CURRENT_USER";
+
+export const SET_LOADING = "SET_LOADING";

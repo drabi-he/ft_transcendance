@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY package*.json ./
 
+RUN npm i react-scripts
+
 RUN npm install
 
 EXPOSE 3000
