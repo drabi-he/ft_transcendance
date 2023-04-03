@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { CommonModule } from './common/common.module';
+import { UploadController } from './user/upload.controller';
+import { RankModule } from './rank/rank.module';
 
 @Module({
   imports: [
@@ -19,8 +21,9 @@ import { CommonModule } from './common/common.module';
     UserModule,
     AuthModule,
     CommonModule,
+    RankModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, UploadController],
   providers: [AppService],
 })
 export class AppModule {}

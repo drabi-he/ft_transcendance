@@ -67,7 +67,7 @@
     0px -2px 5px #f137b8;
 }
 
-/*********************************************** BTN ***********************************************/
+/*********************************************** LOGIN BTN ***********************************************/
 .title-container .login-btn {
   display: flex;
   align-items: center;
@@ -80,4 +80,106 @@
 
 .title-container .login-btn svg {
   color: #fff;
+}
+
+/*********************************************** USER BTN ***********************************************/
+
+.title-container .user-btn {
+  width: 180px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-self: baseline;
+  background-color: #141d3c;
+  font-size: 24px;
+  color: #fff;
+  font-family: "georama", sans-serif;
+  font-weight: 600;
+  transition: all 0.3s linear;
+  overflow: hidden;
+  flex-shrink: 0;
+  /* height: 50px; */
+  /* border: 1px solid #fff; */
+}
+
+.title-container .user-div {
+  position: relative;
+  min-height: 50px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* margin-bottom: 10px; */
+  border-bottom: 1px solid #ffffff33;
+}
+
+.title-container .user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.title-container {
+  z-index: 1;
+}
+
+.title-container .user-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.title-container .user-div svg {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-left: 10px;
+  position: absolute;
+  bottom: -4px;
+}
+
+.title-container .profile,
+.title-container .logout {
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  cursor: pointer;
+  text-transform: capitalize;
+  border-left: 1px solid #ffffff33;
+  border-right: 1px solid #ffffff33;
+  color: #fff;
+}
+
+.title-container .logout {
+  border-bottom: 1px solid #ffffff33;
+}
+
+.title-container .profile svg,
+.title-container .logout svg {
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+.title-container .profile svg {
+  color: #6cba78;
+}
+
+.title-container .logout svg {
+  color: #fd6767;
+}
+
+.title-container .profile:hover,
+.title-container .logout:hover {
+  background: linear-gradient(90deg, rgba(50, 50, 50, 0) 0%, #4933c77b 100%);
+}
+
+.drop-down {
+  height: 130px !important;
+}
+
+.drop-down .user-div svg {
+  rotate: 180deg;
 }

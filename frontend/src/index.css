@@ -12,10 +12,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: "Georama", sans-serif;
   font-weight: 500;
+  background-color: #141b35;
   /* font-family: "Iceberg", cursive; */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+a {
+  text-decoration: none;
 }

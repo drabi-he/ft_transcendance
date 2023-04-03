@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Rank } from 'src/rank/models/rank.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -28,4 +35,11 @@ export class User {
 
   @Column({ default: 'http://localhost:3001/api/uploads/default.jpeg' })
   avatar: string;
+
+  @Column({ default: 0 })
+  points: number;
+
+  @ManyToOne(() => Rank)
+  @JoinColumn({ name: 'rank_id' })
+  rank: Rank;
 }

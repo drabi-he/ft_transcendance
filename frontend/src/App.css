@@ -4,3 +4,9 @@
   height: 100vh;
   background-color: #141b35;
 }
+
+.internal {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

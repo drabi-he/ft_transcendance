@@ -53,7 +53,6 @@
 /*********************************************** NAV ITEMS ***********************************************/
 
 .nav-items {
-  color: #dadada;
   cursor: pointer;
 }
 
@@ -79,6 +78,7 @@
 }
 .item .item-title {
   text-transform: capitalize;
+  color: #dadada;
   position: relative;
   font-size: 1.5rem;
   font-weight: 600;
@@ -89,7 +89,10 @@
 }
 
 .selected {
-  color: #fff;
   background: linear-gradient(90deg, rgba(50, 50, 50, 0) 0%, #4a33c7 100%);
   border-right: 2px solid #927dff !important;
+}
+
+.selected .item-title {
+  color: #fff;
 }

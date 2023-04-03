@@ -1,4 +1,4 @@
-import { GET_CURRENT_USER } from "../actions/types";
+import { GET_CURRENT_USER, LOGOUT_USER } from "../actions/types";
 
 export const userReducer = (state = {}, action: any) => {
   switch (action.type) {
@@ -7,6 +7,12 @@ export const userReducer = (state = {}, action: any) => {
         ...state,
         connected: action.payload.status === "Success",
         data: action.payload.data,
+      };
+    case LOGOUT_USER:
+      return {
+        ...state,
+        connected: !(action.payload.status === "Success"),
+        data: {},
       };
     default:
       return state;

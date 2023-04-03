@@ -1,6 +1,7 @@
 import useContextDevTools from "context-api-dev-tools-extension";
 import { createContext, Dispatch, useEffect, useReducer } from "react";
 import combineReducers from "react-combine-reducers";
+import { dataReducer } from "../reducers/dataReducer";
 import { uiReducer } from "../reducers/uiReducer";
 import { userReducer } from "../reducers/userReducer";
 
@@ -8,7 +9,16 @@ type uiType = {
   loading: boolean;
 };
 
-type dataType = {
+type rankType = {
+  id?: number;
+  name?: string;
+  requiredPoints?: number;
+  upgradePoints?: number;
+  emblem?: string;
+  border?: string;
+};
+
+export type dataType = {
   id?: number;
   login?: string;
   username?: string;
@@ -18,6 +28,7 @@ type dataType = {
   cursus_lvl?: string;
   game_lvl?: string;
   avatar?: string;
+  rank?: rankType;
 };
 
 type userType = {
@@ -47,9 +58,18 @@ const GlobalContext = createContext<{
 }>({ state: initialState, dispatch: () => null });
 
 const GlobalProvider = ({ children }: any) => {
+  const localState = localStorage.getItem("state");
+
+  if (localState) {
+    const parsedState = JSON.parse(localState);
+    initialState.user = parsedState.user;
+    initialState.ui = parsedState.ui;
+    initialState.data = parsedState.data;
+  }
   const [globalReducer, initialGlobalState] = combineReducers({
     user: [userReducer, initialState.user],
     ui: [uiReducer, initialState.ui],
+    data: [dataReducer, initialState.data],
   });
 
   const [state, dispatch] = useReducer(globalReducer, initialGlobalState);
@@ -58,6 +78,7 @@ const GlobalProvider = ({ children }: any) => {
 
   useEffect(() => {
     devTools.sendUpdatedState(state);
+    localStorage.setItem("state", JSON.stringify(state));
   }, [state, devTools]);
 
   return (

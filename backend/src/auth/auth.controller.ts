@@ -1,8 +1,11 @@
 import { UserService } from './../user/user.service';
 import {
+  Body,
   Controller,
   Get,
   Param,
+  Patch,
+  Post,
   Query,
   Req,
   Res,
@@ -11,12 +14,14 @@ import {
 import { config } from 'dotenv';
 import { JwtService } from '@nestjs/jwt';
 import { AuthGuard } from './auth.guard';
+import { RankService } from 'src/rank/rank.service';
 
 @Controller()
 export class AuthController {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly rankService: RankService,
   ) {}
 
   @Get('/login/42Network')
@@ -58,6 +63,7 @@ export class AuthController {
         username: info.login,
         cursus_lvl: info.cursus_users[1].level,
         campus: info.campus[0].name,
+        rank: await this.rankService.findOne({ id: 1 }),
       });
     }
 
@@ -77,14 +83,36 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Get('/user')
   async getUser(@Req() req) {
-    const cookie = req.cookies['jwt'];
+    try {
+      const cookie = req.cookies['jwt'];
 
-    const id = (await this.jwtService.verifyAsync(cookie))['id'];
-
-    if (!id) {
+      const id = (await this.jwtService.verifyAsync(cookie))['id'];
+      return {
+        status: 'Success',
+        data: await this.userService.findOne({ id }),
+      };
+    } catch (error) {
       return { status: 'Error', data: {}, message: 'User not found' };
     }
+  }
 
-    return { status: 'Success', data: await this.userService.findOne({ id }) };
+  @UseGuards(AuthGuard)
+  @Post('logout')
+  async logout(@Req() req, @Res({ passthrough: true }) res) {
+    try {
+      res.clearCookie('jwt');
+      return { status: 'Success', data: {} };
+    } catch (error) {
+      return { status: 'Error', data: {} };
+    }
+  }
+
+  @UseGuards(AuthGuard)
+  @Patch('/user')
+  async updateUser(
+    @Req() req,
+    @Body() data: { username?: string; avatar?: File },
+  ) {
+    return {};
   }
 }

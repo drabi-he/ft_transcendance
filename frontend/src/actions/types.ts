@@ -1,3 +1,6 @@
 export const GET_CURRENT_USER = "GET_CURRENT_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
 
 export const SET_LOADING = "SET_LOADING";
+
+export const GET_USER_PROFILE = "GET_USER_PROFILE";
