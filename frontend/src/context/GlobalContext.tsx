@@ -39,7 +39,10 @@ type userType = {
 type stateType = {
   user: userType;
   ui: uiType;
-  data: dataType[];
+  data: {
+    search: dataType;
+    users: dataType[];
+  };
 };
 
 const initialState: stateType = {
@@ -50,7 +53,10 @@ const initialState: stateType = {
   ui: {
     loading: false,
   },
-  data: [],
+  data: {
+    search: {},
+    users: [],
+  },
 };
 const GlobalContext = createContext<{
   state: stateType;

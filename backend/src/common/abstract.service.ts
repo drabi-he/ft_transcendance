@@ -9,6 +9,14 @@ export class AbstractService {
     return await this.repository.find({ relations });
   }
 
+  async find(fields = {}, condition = {}, relations = []) {
+    return await this.repository.find({
+      select: fields,
+      where: condition,
+      relations,
+    });
+  }
+
   async paginate(page = 1, take = 10, relations = []) {
     if (page < 1) page = 1;
     if (take < 10) take = 10;

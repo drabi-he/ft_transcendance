@@ -81,7 +81,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('/user')
+  @Get('user')
   async getUser(@Req() req) {
     try {
       const cookie = req.cookies['jwt'];
@@ -108,11 +108,28 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Patch('/user')
+  @Patch('user')
   async updateUser(
     @Req() req,
-    @Body() data: { username?: string; avatar?: File },
+    @Body() data: { username?: string; avatar?: string },
   ) {
-    return {};
+    const cookie = req.cookies['jwt'];
+
+    const id = (await this.jwtService.verifyAsync(cookie))['id'];
+    console.log({ data });
+
+    const user = await this.userService.findOne({ id: id });
+
+    this.userService.update(id, {
+      username:
+        data.username && data.username.toLowerCase() !== 'username'
+          ? data.username
+          : user.username,
+      avatar: data.avatar ? data.avatar : user.avatar,
+    });
+    return {
+      status: 'Success',
+      data: await this.userService.findOne({ id: id }),
+    };
   }
 }

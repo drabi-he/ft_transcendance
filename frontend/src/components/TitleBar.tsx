@@ -12,17 +12,31 @@ import {
 import { FaUser } from "react-icons/fa";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
+import { getAllUsers } from "../actions/dataActions";
 
 const TitleBar = () => {
   const {
-    state: { user, ui },
+    state: {
+      user,
+      ui,
+      data: { users },
+    },
     dispatch,
   } = useContext(GlobalContext);
 
-  const [dropdown, setDropdown] = useState(false);
+  const [dropdown, setDropdown] = useState({
+    profile: false,
+    search: false,
+  });
+  const [search, setSearch] = useState("");
+
+  const rst = users.filter((user) => {
+    return user?.username?.toLocaleLowerCase().includes(search.toLowerCase());
+  });
 
   useEffect(() => {
     getCurrentUser(dispatch);
+    getAllUsers(dispatch);
   }, []);
 
   const logout = () => {
@@ -30,17 +44,72 @@ const TitleBar = () => {
   };
   return (
     <div className="title-container">
-      <div className="search-bar">
-        <input type="text" placeholder="Search..." />
-        <MdPersonSearch />
+      <div
+        className={
+          dropdown.search ? "search-bar search-dropdown" : "search-bar"
+        }
+      >
+        <div className="search">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => {
+              e.preventDefault();
+              setSearch(e.target.value);
+              if (search.length >= 3)
+                setDropdown(() => {
+                  return { ...dropdown, search: true };
+                });
+              else
+                setDropdown(() => {
+                  return { ...dropdown, search: false };
+                });
+            }}
+            placeholder="Search..."
+            onFocus={() => {
+              if (search.length >= 3)
+                setDropdown(() => {
+                  return { ...dropdown, search: true };
+                });
+            }}
+            // onBlur={() => {
+            //   setDropdown(() => {
+            //     return { ...dropdown, search: false };
+            //   });
+            // }}
+          />
+          <MdPersonSearch />
+        </div>
+        <div className="search-results">
+          {rst &&
+            rst.length > 0 &&
+            rst.map((user) => (
+              <Link
+                to={`/profile/${user.username}`}
+                key={user.username}
+                className="search-item"
+                onClick={() => {
+                  setDropdown(() => {
+                    return { ...dropdown, search: false };
+                  });
+                  setSearch("");
+                }}
+              >
+                <img src={user.avatar} alt="search avatar" />
+                {user.username}
+              </Link>
+            ))}
+        </div>
       </div>
       <div className="title">ft_transcendance</div>
       {user && user.connected ? (
-        <div className={dropdown ? "user-btn drop-down" : "user-btn"}>
+        <div className={dropdown.profile ? "user-btn drop-down" : "user-btn"}>
           <div
             className="user-div"
             onClick={() => {
-              setDropdown(!dropdown);
+              setDropdown(() => {
+                return { ...dropdown, profile: !dropdown.profile };
+              });
             }}
           >
             <div className="user-avatar">
@@ -53,7 +122,9 @@ const TitleBar = () => {
             to={`/profile/${user.data?.username}`}
             className="profile"
             onClick={() => {
-              setDropdown(false);
+              setDropdown(() => {
+                return { ...dropdown, profile: !dropdown.profile };
+              });
             }}
           >
             <FaUser />

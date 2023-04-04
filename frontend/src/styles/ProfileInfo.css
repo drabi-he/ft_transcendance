@@ -6,7 +6,7 @@
 }
 
 .profileInfo-container .info,
-.profileInfo-container .edit {
+.profileInfo-container .extra {
   width: 49%;
 }
 
@@ -40,13 +40,58 @@
   display: inline-block;
 }
 
+/*********************************************** Not Connected ***********************************************/
+.profileInfo-container .extra h2 {
+  font-family: "iceberg", sans-serif;
+  color: #fff;
+  letter-spacing: 2px;
+  text-transform: capitalize;
+}
+
+/*********************************************** OTHER USER ***********************************************/
+.profileInfo-container .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 10px 0;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.profileInfo-container .btn svg {
+  margin-right: 10px;
+  font-size: 2rem;
+}
+
+.profileInfo-container .add-friend {
+  background-color: #3c60ff;
+}
+
+.profileInfo-container .block-user {
+  background-color: #ff3c3c;
+}
+
+.profileInfo-container .btn:hover {
+  opacity: 1;
+}
+
 /*********************************************** UPDATE ***********************************************/
-.profileInfo-container .edit {
+.profileInfo-container .extra {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.profileInfo-container .edit .update-avatar {
+
+.profileInfo-container .extra .update {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profileInfo-container .extra .update-avatar {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,13 +102,13 @@
   cursor: pointer;
 }
 /* TODO: Make it Possible to select any part of the image and upload only that part */
-.profileInfo-container .edit .update-avatar img {
+.profileInfo-container .extra .update-avatar img {
   height: 100%;
   width: 100%;
   border-radius: 50%;
 }
 
-.profileInfo-container .edit p {
+.profileInfo-container .extra p {
   color: #fff;
   font-size: 1.5rem;
   letter-spacing: 2px;
@@ -72,7 +117,7 @@
   margin-bottom: 20px;
 }
 
-.profileInfo-container .edit input[type="text"] {
+.profileInfo-container .extra input[type="text"] {
   outline: 1px solid #cfcfcf;
   border: none;
   background-color: #222c52;
@@ -88,7 +133,7 @@
   margin-bottom: 10px;
 }
 
-.profileInfo-container .edit .btn-update {
+.profileInfo-container .extra .btn-update {
   width: 100px;
   height: 30px;
   background: linear-gradient(116.04deg, #3c60ff 23.36%, #4a33c7 77.76%);

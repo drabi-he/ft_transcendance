@@ -29,7 +29,9 @@ const Profile = () => {
   const username = useParams().username;
 
   const {
-    state: { data },
+    state: {
+      data: { search },
+    },
     dispatch,
   } = useContext(GlobalContext);
 
@@ -53,9 +55,9 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <div className="avatar">
-        <img src={data[0]?.rank?.border} alt="border" className="border" />
-        <img src={data[0]?.avatar} alt="avatar" className="user-image" />
-        <h1>{data[0]?.username}</h1>
+        <img src={search?.rank?.border} alt="border" className="border" />
+        <img src={search?.avatar} alt="avatar" className="user-image" />
+        <h1>{search?.username}</h1>
       </div>
       <div className="menu">
         {profileItems.map((item, i) => {
@@ -73,7 +75,7 @@ const Profile = () => {
         })}
       </div>
       <div className="stats">
-        {profileItems[0].selected && <ProfileInfo data={data[0]} />}
+        {profileItems[0].selected && <ProfileInfo data={search} />}
         {profileItems[1].selected && <div></div>}
         {profileItems[2].selected && <div></div>}
         {profileItems[3].selected && <div></div>}

@@ -10,14 +10,22 @@
 }
 
 /*********************************************** SEARCH BAR ***********************************************/
-
 .title-container .search-bar {
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  background-color: #141d3c;
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: all 0.3s linear;
+}
+
+.title-container .search-bar .search {
+  min-height: 49px;
   display: flex;
   align-items: center;
   width: 200px;
-  height: 30px;
-  border: 2px solid #616161;
-  border-radius: 5px;
   transition: all 0.3s linear;
 }
 
@@ -33,17 +41,19 @@
 
 .title-container .search-bar input {
   width: 190px;
-  height: 100%;
+  height: 30px;
   border: none;
   outline: none;
   color: #616161;
+  border: 2px solid #616161;
+  border-radius: 5px;
   background-color: transparent;
   padding-left: 40px;
   font-size: 1rem;
   transition: all 0.3s linear;
 }
 
-.title-container .search-bar:has(input:focus) {
+.title-container .search-bar input:focus {
   border: 2px solid #fff;
 }
 
@@ -53,6 +63,44 @@
 
 .title-container .search-bar input:focus + svg {
   color: #fff;
+}
+
+.title-container .search-results {
+  border: 1px solid #ffffff33;
+  /* max-height: 100px; */
+  overflow: auto;
+}
+
+.title-container .search-item {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  color: white;
+  height: 50px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.title-container .search-item:nth-child(odd) {
+  background-color: #141b35;
+}
+
+.title-container .search-item:hover {
+  background: linear-gradient(90deg, rgba(50, 50, 50, 0) 0%, #4933c77b 100%);
+}
+
+.title-container .search-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.search-dropdown {
+  height: auto !important;
+  max-height: 201px;
 }
 
 /*********************************************** TITLE ***********************************************/
@@ -89,7 +137,7 @@
   height: 50px;
   display: flex;
   flex-direction: column;
-  align-self: baseline;
+  align-self: start;
   background-color: #141d3c;
   font-size: 24px;
   color: #fff;

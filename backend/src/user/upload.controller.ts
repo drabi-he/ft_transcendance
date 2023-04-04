@@ -29,7 +29,10 @@ export class UploadController {
     }),
   )
   uploadFile(@UploadedFile() file) {
-    return `http://localhost:3001/api/${file.path}`;
+    return {
+      status: 'Success',
+      data: `http://localhost:3001/api/${file.path}`,
+    };
   }
 
   @Get('uploads/borders/:path')
