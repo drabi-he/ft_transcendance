@@ -46,13 +46,13 @@ export class AuthController {
 
     const info = await profile.json();
 
-    console.log({
-      fn: info.first_name,
-      ln: info.last_name,
-      login: info.login,
-      cl: info.cursus_users[1].level,
-      campus: info.campus[0].name,
-    });
+    // console.log({
+    //   fn: info.first_name,
+    //   ln: info.last_name,
+    //   login: info.login,
+    //   cl: info.cursus_users[1].level,
+    //   campus: info.campus[0].name,
+    // });
 
     // return { info };
     if (!(await this.userService.findOne({ login: info.login }))) {
